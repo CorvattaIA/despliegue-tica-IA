@@ -402,6 +402,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Manejo del Formulario de Contacto (con mailto:) ---
     // No se necesita JS para mailto:, el navegador lo gestiona.
 
+ </script>
+
+  <script type="module">
+      // Importar la función necesaria desde la librería
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      // Inicializar el chat con la URL del webhook y configuración mejorada
+      try {
+          createChat({
+              webhookUrl: 'https://pollux.app.n8n.cloud/webhook/d5065bb5-66bc-4a56-b774-ea3b387919f7/chat',
+              webhookConfig: {
+                  method: 'POST',
+                  headers: {}
+              },
+              target: '#n8n-chat', // Asegura que se renderice en el div correcto
+              mode: 'window',      // Modo ventana flotante
+              defaultLanguage: 'es',
+              initialMessages: [
+                  '¡Hola! 👋 Soy Sócrates.', // Nombre cambiado
+                  'Tu guía en el laberinto de la ética IA. ¿En qué dilema puedo iluminarte hoy?' // Mensaje ajustado
+              ],
+               i18n: {
+                   es: {
+                       title: 'Asistente ÉticaIA', // Título CAMBIADO
+                       subtitle: "Dialoga con Sócrates sobre ética en IA.", // Subtítulo ajustado
+                       footer: '', // Puedes añadir un texto pequeño aquí si quieres
+                       getStarted: 'Iniciar Diálogo', // Botón ajustado
+                       inputPlaceholder: 'Plantea tu cuestión ética...', // Placeholder ajustado
+                   }
+               }
+          });
+       } catch (error) {
+         console.error("Error al inicializar N8N Chat:", error);
+         const n8nChatContainer = document.getElementById('n8n-chat');
+            if (n8nChatContainer) {
+                n8nChatContainer.innerHTML = '<p style="padding: 1rem; text-align: center; color: red;">Error al cargar el chat. Verifica la consola.</p>';
+            }
+       }
+  </script>
+
+</body>
+</html>
 
     // --- Inicialización de N8N Chat ---
     // La inicialización se hace en el script type="module" en el HTML
