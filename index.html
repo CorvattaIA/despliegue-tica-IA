@@ -284,7 +284,43 @@
    <div id="n8n-chat"></div>
 
    <script src="script.js"></script>
+<div id="n8n-chat"></div>
+<script src="script.js"></script>
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
+  try {
+    createChat({
+      webhookUrl: 'https://pollux.app.n8n.cloud/webhook/d5065bb5-66bc-4a56-b774-ea3b387919f7/chat',
+      webhookConfig: {
+        method: 'POST',
+        headers: {}
+      },
+      target: '#n8n-chat',
+      mode: 'window',
+      defaultLanguage: 'es',
+      initialMessages: [
+        '¡Hola! 👋 Soy Sócrates.',
+        'Tu guía en el laberinto de la ética IA. ¿En qué dilema puedo iluminarte hoy?'
+      ],
+      i18n: {
+        es: {
+          title: 'Asistente ÉticaIA',
+          subtitle: "Dialoga con Sócrates sobre ética en IA.",
+          footer: '',
+          getStarted: 'Iniciar Diálogo',
+          inputPlaceholder: 'Plantea tu cuestión ética...',
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Error al inicializar N8N Chat:", error);
+    const n8nChatContainer = document.getElementById('n8n-chat');
+    if (n8nChatContainer) {
+      n8nChatContainer.innerHTML = '<p style="padding: 1rem; text-align: center; color: red;">Error al cargar el chat. Verifica la consola.</p>';
+    }
+  }
+</script>
 </body>
 </html>
 
